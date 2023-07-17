@@ -1,5 +1,5 @@
 package exemplebrojla.demo.student;
-import io.jsonwebtoken.Jwts;
+
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +18,18 @@ public class signinController {
 
     private UsersRepository usersRepository;
 
+    private tokengenerator tok;
+
     private Key secretKey;
 
+    private daoUser daouser;
+
     @Autowired
-    public signinController(UsersRepository usersRepository) {
+    public signinController(UsersRepository usersRepository,daoUser daouser,tokengenerator token) {
         this.usersRepository = usersRepository;
         this.secretKey = generateSecretKey();
+        this.daouser= daouser;
+        this.tok=token;
     }
 
     @PostMapping
@@ -31,22 +37,17 @@ public class signinController {
         System.out.println("API for signin works");
         Optional<User> existingUser = usersRepository.findByEmail(user.getEmail());
 
-        if (existingUser.isPresent() && existingUser.get().getpassword().equals(user.getpassword())) {
-            // User with the provided email and password exists
-            String token = generateToken(existingUser.get().getEmail());
+        if (daouser.userchecking(user)) {
+
+            String token = tok.generatetoken(user.getEmail());
             return ResponseEntity.ok(token);
         } else {
-            // User doesn't exist or the password doesn't match
+
             return ResponseEntity.ok("Invalid credentials");
         }
     }
 
-    public static String generateToken(String subject) {
-        return Jwts.builder()
-                .setSubject(subject)
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
-                .compact();
-    }
+
 
     private Key generateSecretKey() {
         return Keys.secretKeyFor(SignatureAlgorithm.HS256);

@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/signup")
-public class AddController {
+public class signupController {
 
     private UsersRepository usersRepository;
 
     @Autowired
-    public AddController(UsersRepository usersRepository) {
+    public signupController(UsersRepository usersRepository) {
         this.usersRepository = usersRepository;
     }
 
