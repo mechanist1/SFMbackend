@@ -20,7 +20,7 @@ public class daoUser {
         System.out.println("API for signin works");
         Optional<User> existingUser = userRepo.findByEmail(user.getEmail());
 
-        if (existingUser.isPresent() && existingUser.get().getpassword().equals(user.getpassword())) {
+        if (existingUser.isPresent() && existingUser.get().getPassword().equals(user.getPassword())) {
 
             return (true);
         } else {

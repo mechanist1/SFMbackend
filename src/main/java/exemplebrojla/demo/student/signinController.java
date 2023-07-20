@@ -20,14 +20,11 @@ public class signinController {
 
     private tokengenerator tok;
 
-    private Key secretKey;
-
     private daoUser daouser;
 
     @Autowired
     public signinController(UsersRepository usersRepository,daoUser daouser,tokengenerator token) {
         this.usersRepository = usersRepository;
-        this.secretKey = generateSecretKey();
         this.daouser= daouser;
         this.tok=token;
     }
@@ -53,7 +50,4 @@ public class signinController {
         return Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
 
-    private static Key getSigningKey() {
-        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    }
 }

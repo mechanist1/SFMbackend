@@ -15,9 +15,6 @@ public class tokengenerator {
     private static Key getSigningKey() {
         return Keys.secretKeyFor(SignatureAlgorithm.HS256);
     }
-    private Key generateSecretKey() {
-        return Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    }
 
 
     public String generatetoken(String subject){

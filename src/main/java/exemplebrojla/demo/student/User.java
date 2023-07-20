@@ -40,19 +40,19 @@ public class User {
         this.email = email;
     }
 
-    public String getpassword() {
+    public String getPassword() {
         return password;
     }
 
-    public void setpassword(String password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getpasswordagain() {
+    public String getPasswordagain() {
         return passwordagain;
     }
 
-    public void setpasswordagain(String passwordagain) {
+    public void setPasswordagain(String passwordagain) {
         this.passwordagain = passwordagain;
     }
 }
