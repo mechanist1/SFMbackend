@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Key;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/signin")
@@ -31,11 +30,7 @@ public class signinController {
 
     @PostMapping
     public ResponseEntity<String> signin(@RequestBody User user) {
-        System.out.println("API for signin works");
-        Optional<User> existingUser = usersRepository.findByEmail(user.getEmail());
-
         if (daouser.userchecking(user)) {
-
             String token = tok.generatetoken(user.getEmail());
             return ResponseEntity.ok(token);
         } else {
