@@ -2,25 +2,34 @@ package exemplebrojla.demo.student;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 @RestController
 @RequestMapping("")
 public class TempController {
 
-    daoTemp daoTemp;
+    daoTemp daotemp;
+    TempRepository tempRepository;
 
-    public TempController(exemplebrojla.demo.student.daoTemp daoTemp) {
-        this.daoTemp = daoTemp;
+    public TempController(exemplebrojla.demo.student.daoTemp daotemp,TempRepository tempRepository) {
+        this.daotemp = daotemp;
+        this.tempRepository=tempRepository;
     }
 
     @GetMapping
     public ResponseEntity<List<Temp>> getinfo(){
-        return ResponseEntity.status(HttpStatus.OK).body(daoTemp.testing());
-
-
+        System.out.println(daotemp.testing());
+        return ResponseEntity.status(HttpStatus.OK).body(daotemp.testing());
+    };
+    @PostMapping
+    public void postinfo(@RequestBody Temp temp){
+        System.out.println("Temp saved");
+        tempRepository.save(temp);
 
     }
+
+
+
+
 }

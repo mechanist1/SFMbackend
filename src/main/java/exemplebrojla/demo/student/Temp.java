@@ -3,13 +3,11 @@ package exemplebrojla.demo.student;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
-
 @Document(collection ="temp")
 public class Temp {
 
     private String sn;
-    private Date date;
+    private String date;
     private Long temp;
     private Long hum;
 
@@ -23,11 +21,11 @@ public class Temp {
         this.sn = sn;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
